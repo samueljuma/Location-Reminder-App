@@ -12,7 +12,20 @@
           "package_name": "com.udacity.project4"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "299265848814-m27h9s3hdkf2o684ju16ihirgilnaffh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udacity.project4",
+            "certificate_hash": "ce5b805692309f7e4a0b88c24ca36879d8cd9b85"
+          }
+        },
+        {
+          "client_id": "299265848814-t6b3s7nlad686fcbu0fpb8etqa83a203.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAoP3aCgEm0vPTpl11meV8Y0Wl_IVnXtA0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299265848814-t6b3s7nlad686fcbu0fpb8etqa83a203.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
