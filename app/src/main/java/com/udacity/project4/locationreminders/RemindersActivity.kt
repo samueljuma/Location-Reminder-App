@@ -1,9 +1,14 @@
 package com.udacity.project4.locationreminders
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.firebase.ui.auth.AuthUI
+import com.udacity.project4.R
+import com.udacity.project4.authentication.AuthenticationActivity
 import com.udacity.project4.databinding.ActivityRemindersBinding
 
 /**
@@ -20,12 +25,22 @@ class RemindersActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+       return when (item.itemId) {
             android.R.id.home -> {
                 (binding.navHostFragment as NavHostFragment).navController.popBackStack()
-                return true
+                 true
             }
-        }
-        return super.onOptionsItemSelected(item)
+            R.id.logout -> {
+                AuthUI.getInstance().signOut(this)
+                startAuthenticationActivity()
+                true
+            }else -> super.onOptionsItemSelected(item)
+       }
+
+    }
+
+    private fun startAuthenticationActivity() {
+        startActivity(Intent(this, AuthenticationActivity::class.java))
+        finish()
     }
 }

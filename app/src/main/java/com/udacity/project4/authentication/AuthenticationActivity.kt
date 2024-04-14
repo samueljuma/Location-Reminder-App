@@ -43,6 +43,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 AuthenticationViewModel.AuthenticationState.AUTHENTICATED -> startReminderActivity()
                 AuthenticationViewModel.AuthenticationState.UNAUTHENTICATED -> {
                         Toast.makeText(this, "you need to Login", Toast.LENGTH_SHORT).show()
+
                 }else -> {
                 Toast.makeText(this, "There was a Problem. Try Again", Toast.LENGTH_SHORT).show()
                 }
@@ -59,6 +60,7 @@ class AuthenticationActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
 
     // New way - onActivityResult is deprecated
