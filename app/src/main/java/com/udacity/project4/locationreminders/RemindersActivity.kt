@@ -31,8 +31,9 @@ class RemindersActivity : AppCompatActivity() {
                  true
             }
             R.id.logout -> {
-                AuthUI.getInstance().signOut(this)
                 startAuthenticationActivity()
+                AuthUI.getInstance().signOut(this)
+
                 true
             }else -> super.onOptionsItemSelected(item)
        }
