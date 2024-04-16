@@ -1,9 +1,12 @@
 package com.udacity.project4.locationreminders.reminderslist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import com.firebase.ui.auth.AuthUI
 import com.udacity.project4.R
+import com.udacity.project4.authentication.AuthenticationActivity
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentRemindersBinding
@@ -63,17 +66,42 @@ class ReminderListFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle selection based on the menu item ID
         when (item.itemId) {
+            // When the logout option is selected
             R.id.logout -> {
-                // TODO: add the logout implementation
+                // Sign out the user using the AuthUI instance
+                AuthUI.getInstance().signOut(requireContext())
+                    // Add a success listener to handle successful sign-out
+                    .addOnSuccessListener {
+                        // Once the user is signed out, start the AuthenticationActivity
+                        startAuthenticationActivity()
+                    }
             }
         }
+        // Call the superclass implementation to handle other menu items
         return super.onOptionsItemSelected(item)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         // Display logout as menu item
         inflater.inflate(R.menu.main_menu, menu)
     }
+
+    private fun startAuthenticationActivity() {
+        // Create an Intent to launch the AuthenticationActivity
+        val intent = Intent(activity, AuthenticationActivity::class.java)
+
+        // Add a flag to clear the current task, removing all activities on the task stack
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        // Add a flag to start a new task for the AuthenticationActivity
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        // Start the AuthenticationActivity using the constructed Intent
+        startActivity(intent)
+    }
+
 }

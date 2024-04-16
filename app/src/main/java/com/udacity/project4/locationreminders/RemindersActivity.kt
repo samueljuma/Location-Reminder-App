@@ -30,18 +30,9 @@ class RemindersActivity : AppCompatActivity() {
                 (binding.navHostFragment as NavHostFragment).navController.popBackStack()
                  true
             }
-            R.id.logout -> {
-                startAuthenticationActivity()
-                AuthUI.getInstance().signOut(this)
-
-                true
-            }else -> super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
        }
 
     }
 
-    private fun startAuthenticationActivity() {
-        startActivity(Intent(this, AuthenticationActivity::class.java))
-        finish()
-    }
 }
