@@ -23,6 +23,6 @@ fun errorMessage(context: Context, errorCode: Int): String {
         GeofenceStatusCodes.GEOFENCE_TOO_MANY_PENDING_INTENTS -> resources.getString(
             R.string.geofence_too_many_pending_intents
         )
-        else -> resources.getString(R.string.geofence_unknown_error)
+        else -> resources.getString(R.string.unknown_geofence_error)
     }
 }

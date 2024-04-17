@@ -1,23 +1,20 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.gms.google-services'
-    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
-    namespace 'com.udacity.project4'
-    compileSdk 33
+    compileSdkVersion rootProject.compileSdkVersion
+    //buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.udacity.project4"
-        minSdk rootProject.minSdkVersion
-        targetSdk rootProject.targetSdkVersion
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -34,10 +31,20 @@ android {
         returnDefaultValues = true
     }
 
-//    dataBinding {
-//        enabled = true
-//        enabledForTests = true
-//    }
+    packagingOptions {
+        // for JNA and JNA-platform
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+        // for byte-buddy
+        exclude "META-INF/licenses/ASM"
+        pickFirst "win32-x86-64/attach_hotspot_windows.dll"
+        pickFirst "win32-x86/attach_hotspot_windows.dll"
+    }
+
+    //dataBinding {
+    //    enabled = true
+    //    enabledForTests = true
+    //}
     buildFeatures {
         dataBinding true
     }
@@ -45,39 +52,53 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     // App dependencies
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
+    implementation "androidx.legacy:legacy-support-v4:$androidXLegacySupport"
+    implementation "androidx.annotation:annotation:$androidXAnnotations"
+
+    implementation "androidx.cardview:cardview:$cardVersion"
     implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
 
-    // Architecture Components & Navigation dependencies
-    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleKtxVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleKtxVersion"
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Architecture Components
+    //Navigation dependencies
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
+
+
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
-    // Room dependencies
+    //Room dependencies
+    implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
-        // Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$roomVersion"
 
-    // Koin
-    implementation "io.insert-koin:koin-android:$koinVersion"
+    //Coroutines Dependencies
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    //Koin
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
     testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
-    testImplementation "io.insert-koin:koin-test:$koinVersion"
 
     // AndroidX Test - JVM testing
     testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
@@ -93,26 +114,25 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     androidTestImplementation "org.robolectric:annotations:$robolectricVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-        // Testing code for more advanced views such as the DatePicker and RecyclerView.
-        // It also contains accessibility checks and a class called CountingIdlingResource.
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
     androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
     androidTestImplementation "junit:junit:$junitVersion"
-        // Testing code should not be included in the main code.
-        // Once https://issuetracker.google.com/128612536 is fixed this can be fixed.
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentTestingVersion"
+    // Once https://issuetracker.google.com/127986458 is fixed this can be testImplementation
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     implementation "androidx.test:core:$androidXTestCoreVersion"
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
     androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
     androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
+    androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
 
-    // Maps & Geofencing
-    implementation "com.google.android.gms:play-services-location:$playServicesLocationVersion"
-    implementation "com.google.android.gms:play-services-maps:$playServicesMapsVersion"
 
-    // Firebase
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation platform('com.google.firebase:firebase-bom:32.8.0')
-    implementation "com.firebaseui:firebase-ui-auth:$firebaseUiAuthVersion" // It is separate library from the core Firebase libraries
-    implementation "com.google.firebase:firebase-auth"
+
+    //Maps & Geofencing
+    implementation "com.google.android.gms:play-services-location:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-maps:$playServicesVersionMaps"
+
+    //Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
+
 }

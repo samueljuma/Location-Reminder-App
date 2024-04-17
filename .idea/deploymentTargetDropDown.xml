@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="RemindersActivityTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
@@ -10,12 +13,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\samuel\.android\avd\Pixel_7_API_33_Android_13_.avd" />
+                  <value value="C:\Users\samuel\.android\avd\Pixel_7_Pro_API_33.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-16T07:58:44.104153300Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-04-17T04:54:58.415600600Z" />
         </State>
       </entry>
     </value>

@@ -78,7 +78,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         // Set click listener for the button to handle location selection
-        binding.selectLocatioBtn.setOnClickListener {
+        binding.selectLocationBtn.setOnClickListener {
             onLocationSelected()
         }
     }
