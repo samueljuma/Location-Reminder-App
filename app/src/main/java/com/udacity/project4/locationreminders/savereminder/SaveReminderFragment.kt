@@ -55,7 +55,7 @@ class SaveReminderFragment : BaseFragment() {
     private val geofencePendingIntent: PendingIntent by lazy {
         val intent = Intent(requireContext(), GeofenceBroadcastReceiver::class.java)
         intent.action = ACTION_GEOFENCE_EVENT
-        PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
     }
 
     private lateinit var geofencingClient: GeofencingClient
@@ -247,7 +247,7 @@ class SaveReminderFragment : BaseFragment() {
         val geofence = Geofence.Builder()
             .setRequestId(currentGeofenceData.id)
             .setCircularRegion(
-                currentGeofenceData.latitude!!,
+                currentGeofenceData.latitude!!,// Very dangerous
                 currentGeofenceData.longitude!!,
                 GeofenceUtils.GEOFENCE_RADIUS_IN_METERS
             )
