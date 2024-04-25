@@ -8,10 +8,10 @@
       <entry key="RemindersActivityTest">
         <State />
       </entry>
-      <entry key="RemindersLocalRepositoryTest">
+      <entry key="app">
         <State />
       </entry>
-      <entry key="app">
+      <entry key="saveReminderScreen_showToastMessage()">
         <State />
       </entry>
     </value>

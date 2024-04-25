@@ -153,11 +153,11 @@ class RemindersActivityTest :
         onView(withId(R.id.reminderDescription)).perform(typeText("Description"))
         closeSoftKeyboard()
 
-        Thread.sleep(1000)
 
         onView(withId(R.id.selectLocation)).perform(click())
         onView(withId(R.id.maps_fragment)).perform(longClick())
-        onView(withId(R.id.selectLocation)).perform(click())
+        // I found that I had called the wrong event. So I called the right event
+        onView(withId(R.id.select_locationBtn)).perform(click())
 
         onView(withId(R.id.saveReminder)).perform(click())
 
