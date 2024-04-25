@@ -6,7 +6,7 @@ import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
 import net.bytebuddy.implementation.bytecode.Throw
 
 //Use FakeDataSource that acts as a test double to the LocalDataSource
-class FakeDataSource(var remindersList: MutableList<ReminderDTO>? = mutableListOf()) :
+class FakeDataSource(var remindersList: MutableList<ReminderDTO> = mutableListOf()) :
     ReminderDataSource {
 
 
